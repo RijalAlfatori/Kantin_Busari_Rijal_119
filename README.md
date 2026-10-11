@@ -1,16 +1,51 @@
-# app1
+# Kantin Bu Sari
 
-A new Flutter project.
+Aplikasi pemesanan makanan ringan ala kantin kampus, dibangun dengan **Flutter**.
+Project ini berisi pemesanan menu (makanan, cemilan, minuman, paket hemat),
+keranjang belanja, checkout form, sampai halaman sukses.
 
-## Getting Started
+## Halaman
 
-This project is a starting point for a Flutter application.
+| Route        | Halaman                             | Fitur widget interaktif                                                                                |
+| ------------ | ----------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `/`          | Beranda                             | Search bar, **PageView** promo auto-scroll, **ChoiceChip** kategori, **GridView** menu, FAB keranjang|
+| `/menu`      | Daftar Menu                         | Search bar, filter **ChoiceChip** kategori, sortir **PopupMenuButton**, ListView, RefreshIndicator  |
+| `/detail`    | Detail Menu                         | Hero image, **ChoiceChip** varian, **CheckboxListTile** topping, **Stepper** qty, **TextField** note |
+| `/cart`      | Keranjang                           | ListView kartu, **Dismissible** swipe-hapus, stepper, **TextField** kode promo, ringkasan            |
+| `/checkout`  | Pembayaran                          | **Form** (TextFormField), **RadioListTile** metode bayar, **Switch** cutlery, ringkasan               |
+| `/success`   | Pesanan Diterima                    | Animasi **ScaleTransition**, **LinearProgressIndicator**, kartu detail pesanan                       |
 
-A few resources to get you started if this is your first Flutter project:
+## State Management
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Pakai pola `InheritedNotifier` bawaan Flutter lewat `CartScope` —
+tersimpan di `lib/state/cart_state.dart` (model keranjang dan notifier) dan
+`lib/state/order_record.dart` (record pesanan akhir).
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Struktur Direktori
+
+```
+lib/
+├── main.dart
+├── models/
+│   └── menu_item.dart         # model + helper format Rupiah + data menu
+├── pages/
+│   ├── home_page.dart
+│   ├── menu_list_page.dart
+│   ├── menu_detail_page.dart
+│   ├── cart_page.dart
+│   ├── checkout_page.dart
+│   └── order_success_page.dart
+├── state/
+│   ├── cart_state.dart
+│   └── order_record.dart
+└── widgets/
+    ├── categories.dart         # definisi kategori & promo
+    └── common_widgets.dart      # kartu menu, chip rating, banner, FAB keranjang
+```
+
+## Menjalankan
+
+```
+flutter pub get
+flutter run
+```
